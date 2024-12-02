@@ -30,6 +30,9 @@ class LottoManager {
       // 4. 당첨 번호를 입력 받는 기능
       const winningLotto = await this.#getWinningNumbers();
 
+      // 5. 보너스 번호를 입력받는 기능
+      const bonusNumber = await this.#getBonusNumber(winningLotto);
+      console.log(bonusNumber);
     } catch (error) {
       throw error;
     }
@@ -68,6 +71,18 @@ class LottoManager {
     }
   }
 
+  async #getBonusNumber(winningLotto) {
+    while (true) {
+      try {
+        const bonusNumber = await this.#inputView.readBonusNumber();
+        this.#validate.isVerifiedBonus(bonusNumber);
+        this.#validate.isDuplicateWithWinningNumbers(winningLotto.getNumbers(), bonusNumber);
+        return Number(bonusNumber);
+      } catch (error) {
+        this.#outputView.printErrorMessage(error.message);
+      }
+    }
+  }
 }
 
 export default LottoManager;

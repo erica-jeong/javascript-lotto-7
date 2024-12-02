@@ -71,6 +71,19 @@ class Validate {
       throw new Error('[ERROR] 당첨번호는 중복될 수 없습니다.');
     }
   }
+
+  isVerifiedBonus(input) {
+    this.isEmpty(input);
+    this.isNumber(input);
+    this.isInteger(input);
+    this.isNumberInRange(input);
+  }
+
+  isDuplicateWithWinningNumbers(winningNumbers, bonus) {
+    if (winningNumbers.includes(Number(bonus))) {
+      throw new Error('[ERROR] 당첨번호와 보너스 번호는 중복될 수 없습니다.');
+    }
+  }
 }
 
 export default Validate;
