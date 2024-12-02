@@ -26,7 +26,10 @@ class LottoManager {
 
       // 3. 발행된 로또 출력
       this.#outputView.printBoughtLottos(lottos);
-      
+
+      // 4. 당첨 번호를 입력 받는 기능
+      const winningLotto = await this.#getWinningNumbers();
+
     } catch (error) {
       throw error;
     }
@@ -52,6 +55,19 @@ class LottoManager {
     }
     return lottos;
   }
+
+  async #getWinningNumbers() {
+    while (true) {
+      try {
+        const winningNumbers = await this.#inputView.readWinningNumbers();
+        this.#validate.isVerifiedWinningNumbers(winningNumbers);
+        return new Lotto(winningNumbers.split(',').map(number => Number(number)));
+      } catch (error) {
+        this.#outputView.printErrorMessage(error.message);
+      }
+    }
+  }
+
 }
 
 export default LottoManager;
