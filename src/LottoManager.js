@@ -23,6 +23,9 @@ class LottoManager {
       // 2. 구입 금액 만큼 로또를 발행
       const lottoCount = amount / 1000;
       const lottos = this.#generateLotto(lottoCount);
+
+      // 3. 발행된 로또 출력
+      this.#outputView.printBoughtLottos(lottos);
       
     } catch (error) {
       throw error;
