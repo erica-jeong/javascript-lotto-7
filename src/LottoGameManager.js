@@ -37,7 +37,9 @@ class LottoGameManager {
 
       // 6. 당첨을 계산하는 기능
       const winningResult = this.#lottoGame.calculateWinningResult(lottos, winningLotto, bonusNumber);
-      console.log(winningResult);
+
+      // 7. 당첨 내역 출력 기능
+      this.#outputView.printWinningResult(winningResult);
     } catch (error) {
       throw error;
     }
@@ -53,15 +55,6 @@ class LottoGameManager {
         this.#outputView.printErrorMessage(error.message);
       }
     }
-  }
-
-  #generateLotto(lottoCount) {
-    const lottos = [];
-    for (let i = 0; i < lottoCount; i += 1) {
-      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      lottos.push(new Lotto(numbers));
-    }
-    return lottos;
   }
 
   async #getWinningNumbers() {
