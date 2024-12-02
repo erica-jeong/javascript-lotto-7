@@ -30,6 +30,16 @@ class LottoGame {
     });
     return winningResult;
   }
+
+  calculateReturnRate(amount, winningResult) {
+    const winningMoney =
+      winningResult.first * 2000000000 +
+      winningResult.second * 30000000 +
+      winningResult.third * 1500000 +
+      winningResult.fourth * 50000 +
+      winningResult.fifth * 5000;
+    return (winningMoney / amount * 100).toFixed(1);
+  }
 }
 
 export default LottoGame;

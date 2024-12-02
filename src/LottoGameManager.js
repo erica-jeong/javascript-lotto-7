@@ -40,6 +40,10 @@ class LottoGameManager {
 
       // 7. 당첨 내역 출력 기능
       this.#outputView.printWinningResult(winningResult);
+
+      // 8. 수익률 계산하는 기능
+      const returnRate = this.#lottoGame.calculateReturnRate(amount, winningResult);
+      
     } catch (error) {
       throw error;
     }
