@@ -1,4 +1,4 @@
-import LottoManager from './LottoManager.js'
+import LottoManager from './LottoGameManager.js'
 
 class App {
   async run() {

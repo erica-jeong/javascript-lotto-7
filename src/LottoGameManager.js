@@ -3,16 +3,18 @@ import InputView from './InputView.js'
 import OutputView from './OutputView.js'
 import Validate from './Validate.js'
 import Lotto from './Lotto.js'
+import LottoGame from './LottoGame.js'
 
-class LottoManager {
-  #inputView
-  #outputView
-  #validate
-
+class LottoGameManager {
+  #inputView;
+  #outputView;
+  #validate;
+  #lottoGame;
   constructor() {
     this.#inputView = new InputView();
     this.#outputView = new OutputView();
     this.#validate = new Validate();
+    this.#lottoGame = new LottoGame();
   }
 
   async start() {
@@ -22,7 +24,7 @@ class LottoManager {
 
       // 2. 구입 금액 만큼 로또를 발행
       const lottoCount = amount / 1000;
-      const lottos = this.#generateLotto(lottoCount);
+      const lottos = this.#lottoGame.generateLotto(lottoCount);
 
       // 3. 발행된 로또 출력
       this.#outputView.printBoughtLottos(lottos);
@@ -32,7 +34,10 @@ class LottoManager {
 
       // 5. 보너스 번호를 입력받는 기능
       const bonusNumber = await this.#getBonusNumber(winningLotto);
-      console.log(bonusNumber);
+
+      // 6. 당첨을 계산하는 기능
+      const winningResult = this.#lottoGame.calculateWinningResult(lottos, winningLotto, bonusNumber);
+      console.log(winningResult);
     } catch (error) {
       throw error;
     }
@@ -83,6 +88,7 @@ class LottoManager {
       }
     }
   }
+
 }
 
-export default LottoManager;
+export default LottoGameManager;

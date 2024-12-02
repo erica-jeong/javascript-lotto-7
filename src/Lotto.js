@@ -19,6 +19,17 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
+  // 당첨 번호만 로또와 비교해서 몇개 일치하는지 확인
+  getWinningResult(winningNumber, bonusNumber) {
+    const matchedNumber = this.#numbers.filter(number => winningNumber.includes(number)).length;
+    if (matchedNumber === 6) return 1;
+    if (matchedNumber === 5 && this.#numbers.includes(bonusNumber)) return 2;
+    if (matchedNumber === 5) return 3;
+    if (matchedNumber === 4) return 4;
+    if (matchedNumber === 3) return 5;
+    return 0;
+  }
 }
 
 export default Lotto;
