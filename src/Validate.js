@@ -51,7 +51,7 @@ class Validate {
       this.isInteger(number);
       this.isNumberInRange(number);
     });
-    this.hasDuplicate(numbers);
+    // this.hasDuplicate(numbers);
   }
 
   isNumberInRange(input) {

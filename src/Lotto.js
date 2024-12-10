@@ -3,6 +3,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#validateDuplicate(numbers);
     this.#numbers = this.#sortNumbers(numbers);
   }
 
@@ -14,6 +15,12 @@ class Lotto {
 
   #sortNumbers(numbers) {
     return numbers.sort((a, b) => a - b);
+  }
+
+  #validateDuplicate(numbers) {
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error('[ERROR] 당첨번호는 중복될 수 없습니다.');
+    }
   }
 
   getNumbers() {
